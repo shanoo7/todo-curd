@@ -1,0 +1,197 @@
+/* Global Styles */
+#root {
+  width: 100%;
+  height: 100vh;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  background-color: rgb(71, 67, 67);
+  box-sizing: border-box;
+}
+
+/* Main Heading */
+.mainHeading {
+  border: 1px solid rgb(211, 37, 37);
+  border-radius: 4px;
+  padding:5px;
+  background-color: rgb(56, 78, 78);
+  display: inline-block;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Form Styles */
+.formHeading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+  width:100%;
+  /* background-color: aqua; */
+}
+
+.todoForm {
+  background-color: rgb(26, 24, 24);
+  width: 100%;
+  padding-left: 20px;
+  max-width: 500px;
+  /* height: 40px; */
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  margin: 0 auto;
+}
+
+.todoForm input {
+  background-color: rgb(26, 24, 24);
+  color: gray;
+  width: 100%;
+  padding-left: 10px;
+  outline: none;
+  border: none;
+}
+
+.todoForm button {
+  background-color: green;
+  width: 50px;
+  height: 100%;
+  padding: 12px;
+  outline: none;
+  border: none;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+/* Heading */
+.heading {
+  font-weight: 700;
+  color: rgb(178, 194, 34);
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+/* List Heading */
+.listHeading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+/* Todo List (inline layout) */
+.todoList {
+  background-color: rgb(26, 24, 24);
+  width: 100%;
+  max-width: 500px;
+  border-radius: 4px;
+  padding: 10px;
+  margin: 10px auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Ensures space between items */
+  text-align: left;
+}
+
+.title {
+  font-weight: bold;
+  color: rgb(115, 233, 194);
+  flex: 1; /* Ensures title has some flex space */
+}
+#title {
+  width: 95%;
+  border-bottom: 1px solid gray;
+
+  
+}
+
+.description {
+  color: gray;
+  font-size: 0.875rem;
+  flex: 2; /* Ensures description has more space */
+}
+
+.todoList .listInput {
+  background-color: rgb(26, 24, 24);
+  outline: none;
+  border: none;
+  width: 100%;
+  font-weight: bold;
+  
+}
+
+
+.todoList .listInput2 {
+  background-color: rgb(26, 24, 24);
+  color: rgb(168, 86, 86);
+  outline: none;
+  border: none;
+  width: 100%;
+  text-decoration: line-through;
+  font-weight: bold;
+}
+
+.checkBox input[type="checkbox"] {
+  appearance: none; /* Remove default checkbox styling */
+  width: 15px;
+  height: 15px;
+  cursor: pointer; /* Add pointer cursor for better UX */
+  border-radius: 4px; /* Optional: make checkbox slightly rounded */
+  border: 1px solid gray; /* Default border red */
+  background-color: red; /* Optional: white background */
+  
+  
+}
+
+/* Checked state styling */
+.checkBox input[type="checkbox"]:checked {
+  border: 1px solid gray; /* Border green when checked */
+  background-color: green; /* Keep background white */
+}
+
+
+/* Responsive Breakpoints */
+@media (max-width: 600px) {
+  .todoForm {
+    max-width: 400px;
+    height: 35px;
+  }
+
+  .todoList {
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 450px) {
+  .todoForm {
+    max-width: 300px;
+    height: 35px;
+  }
+
+  .todoList {
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 350px) {
+  .todoForm {
+    max-width: 250px;
+    height: 30px;
+  }
+
+  .todoList {
+    max-width: 250px;
+  }
+}
+
+@media (max-width: 300px) {
+  .todoForm {
+    max-width: 200px;
+    height: 30px;
+  }
+
+  .todoList {
+    max-width: 200px;
+  }
+}
