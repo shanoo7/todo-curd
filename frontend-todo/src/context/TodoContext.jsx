@@ -17,7 +17,10 @@ const useCustomHook = () => useContext(CreateContext);
 const ContextProvider = ({ children }) => {
     const [todos, setTodos] = useState([]);
 
-    const API_URL = 'http://localhost:5000/api/users'; // Updated API URL
+    // const API_URL = 'http://localhost:5000/api/users'; // Updated API URL
+    const API_URL = window.location.hostname === 'localhost'
+  ? 'http://localhost:5000/api/users'
+  : 'https://todo-curd-3.onrender.com/api/users';
 
     // Get all todos from the backend (GET)
     const getTodos = async () => {
