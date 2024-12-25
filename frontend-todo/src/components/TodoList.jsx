@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { useCustomHook } from '../context';
+import React, { useState } from "react";
+import { useCustomHook } from "../context";
 
 function TodoList({ data }) {
     const { deleteTodo, updateTodo, toggleComplete } = useCustomHook();
     const { _id, title, description, completed } = data;
-    const [msgDescription, setMsgDescription] = useState(description); // State for editing the description
+    const [msgDescription, setMsgDescription] = useState(description);
     const [isEditableTodo, setIsEditableTodo] = useState(false);
-    const [msgTodo, setMsgTodo] = useState(title); // State for editing the title
+    const [msgTodo, setMsgTodo] = useState(title);
 
     const edit = () => {
         updateTodo(_id, { ...data, title: msgTodo, description: msgDescription });
@@ -18,27 +18,37 @@ function TodoList({ data }) {
     };
 
     return (
-        <div className='listHeading'>
-            <div className='todoList'>
-                <label className='checkBox'>
-                    <input type='checkbox' checked={completed} onChange={toggleCompleted} />
+        <div className="p-4 bg-gradient-to-r from-pink-300 via-purple-300 to-blue-300 rounded-md shadow-lg hover:shadow-xl transition-shadow duration-300">
+            <div className="flex justify-between items-center space-x-4">
+                {/* Checkbox */}
+                <label className="flex items-center">
+                    <input
+                        type="checkbox"
+                        checked={completed}
+                        onChange={toggleCompleted}
+                        className="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
+                    />
                 </label>
 
-                <div className="flex flex-col">
-                    {/* Title Input */}
-                    <input id='title'
-                        className={`title ${completed ? "listInput2" : "listInput"
-                            }`}  // Fixed height of 2.5rem (40px)
+                {/* Title and Description */}
+                <div className="flex flex-col items-start flex-grow">
+                    <input
+                        id="title"
+                        className={`w-full text-sm border p-1 font-medium rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none outline-none${completed
+                                ? "bg-gray-200 text-gray-500 line-through"
+                                : "bg-white text-black"
+                            }`}
                         type="text"
                         value={msgTodo}
                         onChange={(e) => setMsgTodo(e.target.value)}
                         readOnly={!isEditableTodo}
                         placeholder="Title"
                     />
-
-                    {/* Description Input */}
                     <input
-                        className={` description ${completed ? "listInput2 mt-2" : "listInput mt-2"}`}
+                        className={`w-full mt-1 text-sm border p-1 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none outline-none${completed
+                                ? "bg-gray-200 text-gray-500 line-through"
+                                : "bg-white text-black"
+                            }`}
                         type="text"
                         value={msgDescription}
                         onChange={(e) => setMsgDescription(e.target.value)}
@@ -47,30 +57,35 @@ function TodoList({ data }) {
                     />
                 </div>
 
-
-
-                <button style={{
-                    width: "30px",
-                    marginRight: "5px",
-                    border: "none",
-                    borderRadius: "2px"
-                }}
-                    onClick={() => {
-                        if (completed) return;
-                        isEditableTodo ? edit() : setIsEditableTodo((pre) => !pre);
-                    }}
-                    disabled={completed}
-                >
-                    {isEditableTodo ? "📁" : "🖊"}
-                </button>
-
-                <button style={{ border: "none", borderRadius: "2px", marginRight: "5px" }} onClick={() => deleteTodo(_id)} disabled={completed}>❌</button>
+                {/* Action Buttons */}
+                <div className="flex space-x-2">
+                    <button
+                        onClick={() => {
+                            if (completed) return;
+                            isEditableTodo ? edit() : setIsEditableTodo((pre) => !pre);
+                        }}
+                        disabled={completed}
+                        className={`px-2 py-1 text-sm rounded-md transition-all duration-200 ${completed
+                                ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                                : "bg-green-500 text-white hover:bg-green-600"
+                            }`}
+                    >
+                        {isEditableTodo ? "📁" : "🖊"}
+                    </button>
+                    <button
+                        onClick={() => deleteTodo(_id)}
+                        disabled={completed}
+                        className={`px-2 py-1 text-sm rounded-md transition-all duration-200 ${completed
+                                ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                                : "bg-red-500 text-white hover:bg-red-600"
+                            }`}
+                    >
+                        ❌
+                    </button>
+                </div>
             </div>
         </div>
     );
 }
 
 export default TodoList;
-
-
-

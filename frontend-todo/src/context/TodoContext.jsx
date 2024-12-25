@@ -2,13 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import axios from 'axios';
 
 // createContext
-const CreateContext = createContext({
-    myTodo: [],
-    addTodo: (todo) => {},
-    updateTodo: (id, todo) => {},
-    deleteTodo: (id) => {},
-    toggleComplete: (id) => {},
-});
+const CreateContext = createContext();
 
 // customHook..
 const useCustomHook = () => useContext(CreateContext);
@@ -19,14 +13,14 @@ const ContextProvider = ({ children }) => {
 
     // const API_URL = 'http://localhost:5000/api/users'; // Updated API URL
     const API_URL = window.location.hostname === 'localhost'
-  ? 'http://localhost:5000/api/users'
-  : 'https://todo-curd-3.onrender.com/api/users';
+        ? 'http://localhost:3000/api/users'
+        : 'https://todo-curd-3.onrender.com/api/users';
 
     // Get all todos from the backend (GET)
     const getTodos = async () => {
         try {
-            const response = await axios.get(API_URL);
-            setTodos(response.data); // Set the todos from the response
+            const res = await axios.get(API_URL);
+            setTodos(res.data); // Set the todos from the response
         } catch (error) {
             console.error("Error fetching todos:", error);
         }
@@ -35,8 +29,8 @@ const ContextProvider = ({ children }) => {
     // Add a new todo (POST)
     const addTodo = async (todo) => {
         try {
-            const response = await axios.post(API_URL, todo);
-            setTodos((prev) => [response.data, ...prev]); // Add the new todo to the state
+            const res = await axios.post(API_URL, todo);
+            setTodos((prev) => [res.data, ...prev]); // Add the new todo to the state
         } catch (error) {
             console.error("Error creating todo:", error);
         }
@@ -45,9 +39,9 @@ const ContextProvider = ({ children }) => {
     // Update an existing todo (PUT)
     const updateTodo = async (id, updatedTodo) => {
         try {
-            const response = await axios.put(`${API_URL}/${id}`, updatedTodo);
+            const res = await axios.put(`${API_URL}/${id}`, updatedTodo);
             setTodos((prev) =>
-                prev.map((todo) => (todo._id === id ? response.data : todo))
+                prev.map((todo) => (todo._id === id ? res.data : todo))
             );
         } catch (error) {
             console.error("Error updating todo:", error);
