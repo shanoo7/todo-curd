@@ -4,12 +4,13 @@ import { useCustomHook } from "../context";
 function TodoList({ data }) {
     const { deleteTodo, updateTodo, toggleComplete } = useCustomHook();
     const { _id, title, description, completed } = data;
-    const [msgDescription, setMsgDescription] = useState(description);
-    const [isEditableTodo, setIsEditableTodo] = useState(false);
-    const [msgTodo, setMsgTodo] = useState(title);
+
+    const [isEditableTodo, setIsEditableTodo] = useState(false);        //true/false
+    const [editDescription, setEditDescription] = useState(description);  //description
+    const [editTitle, setEditTitle] = useState(title);                      //title
 
     const edit = () => {
-        updateTodo(_id, { ...data, title: msgTodo, description: msgDescription });
+        updateTodo(_id, { ...data, title: editTitle, description: editDescription });
         setIsEditableTodo(false);
     };
 
@@ -32,6 +33,7 @@ function TodoList({ data }) {
 
                 {/* Title and Description */}
                 <div className="flex flex-col items-start flex-grow">
+                {/* Title */}
                     <input
                         id="title"
                         className={`w-full text-sm border p-1 font-medium rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none outline-none${completed
@@ -39,19 +41,20 @@ function TodoList({ data }) {
                                 : "bg-white text-black"
                             }`}
                         type="text"
-                        value={msgTodo}
-                        onChange={(e) => setMsgTodo(e.target.value)}
+                        value={editTitle}
+                        onChange={(e) => setEditTitle(e.target.value)}
                         readOnly={!isEditableTodo}
                         placeholder="Title"
                     />
+                    {/* Description */}
                     <input
                         className={`w-full mt-1 text-sm border p-1 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none outline-none${completed
                                 ? "bg-gray-200 text-gray-500 line-through"
                                 : "bg-white text-black"
                             }`}
                         type="text"
-                        value={msgDescription}
-                        onChange={(e) => setMsgDescription(e.target.value)}
+                        value={editDescription}
+                        onChange={(e) => setEditDescription(e.target.value)}
                         readOnly={!isEditableTodo}
                         placeholder="Description"
                     />
