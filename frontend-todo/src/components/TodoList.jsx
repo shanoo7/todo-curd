@@ -35,7 +35,7 @@ function TodoList({ data }) {
                 <div className="flex flex-col items-start flex-grow">
                 {/* Title */}
                     <input
-                        id="title"
+                        
                         className={`w-full text-sm border p-1 font-medium rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none outline-none${completed
                                 ? "bg-gray-200 text-gray-500 line-through"
                                 : "bg-white text-black"
